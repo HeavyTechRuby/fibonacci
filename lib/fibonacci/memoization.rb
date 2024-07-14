@@ -1,5 +1,6 @@
 module Fibonacci
-  module Naive
+  module Memoization
+    # TODO: memoize
     def self.fibonacci(n)
       return 0 if n.zero?
       return 1 if n == 1
@@ -8,4 +9,3 @@ module Fibonacci
     end
   end
 end
-
