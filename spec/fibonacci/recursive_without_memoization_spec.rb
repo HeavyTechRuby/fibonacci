@@ -1,3 +1,4 @@
+require 'fibonacci/naive'
 require 'fibonacci/recursive_without_memoization'
 
 module Fibonacci
