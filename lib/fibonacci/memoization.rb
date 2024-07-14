@@ -1,10 +1,11 @@
 module Fibonacci
   module Memoization
-    # TODO: memoize
     def self.fibonacci(index)
       return index if index < 2
 
-      fibonacci(index - 2) + fibonacci(index - 1)
+      @cached ||= {}
+
+      @cached[index] ||= fibonacci(index - 2) + fibonacci(index - 1)
     end
   end
 end
