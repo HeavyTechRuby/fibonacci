@@ -1,11 +1,10 @@
 module Fibonacci
   module Memoization
     # TODO: memoize
-    def self.fibonacci(n)
-      return 0 if n.zero?
-      return 1 if n == 1
+    def self.fibonacci(index)
+      return index if index < 2
 
-      fibonacci(n - 2) + fibonacci(n - 1)
+      fibonacci(index - 2) + fibonacci(index - 1)
     end
   end
 end
