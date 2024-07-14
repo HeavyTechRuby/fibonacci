@@ -6,10 +6,12 @@ class RootPath
   end
 
   def to_s = pathname.to_s
-  def join(*args) = pathname.join(*args)
+  def join(*) = pathname.join(*)
 end
 
 $LOAD_PATH.unshift(RootPath.new.to_s)
+
+require 'dependencies'
 
 module WithRoot
   def root = RootPath.new
