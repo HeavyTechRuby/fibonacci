@@ -10,6 +10,7 @@
 # See https://docs.rubocop.org/rubocop/configuration
 
 AllCops:
+  TargetRubyVersion: 3.3
   NewCops: enable
 
 Style/FrozenStringLiteralComment:

@@ -1,0 +1,2 @@
+benchmark:
+	ruby benchmark.rb
