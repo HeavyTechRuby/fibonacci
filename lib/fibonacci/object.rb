@@ -1,11 +1,23 @@
 module Fibonacci
   module Object
     def self.fibonacci(index)
-      current = Number.new(0)
+      numbers = Numbers.new
 
-      current = current.next while current.index < index
+      numbers.take(index + 1)[-1]
+    end
 
-      current.to_i
+    class Numbers
+      include Enumerable
+
+      def each
+        current = Number.new(0)
+
+        loop do
+          yield current.to_i
+
+          current = current.next
+        end
+      end
     end
 
     class Number
