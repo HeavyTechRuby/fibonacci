@@ -29,4 +29,3 @@ recursive without memoization:     2059.7 i/s - 6842.93x  slower
                naive:       14.7 i/s - 956878.59x  slower
 ```
 
-naive:       14.5 i/s - 700161.57x  slower
