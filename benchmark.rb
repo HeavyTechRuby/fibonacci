@@ -36,6 +36,7 @@ Benchmark.ips do |x|
   x.report('object') { Fibonacci::Object.fibonacci(NUMBER) }
   x.report('functional') { Fibonacci::Functional.fibonacci(NUMBER) }
   x.report('adapter') { Fibonacci::Adapter.new(:fast).fibonacci(NUMBER) }
+  x.report('with_class_varialble') { Fibonacci::WithClassVarialble.fibonacci(NUMBER) }
 
   # Compare the iterations per second of the various reports!
   x.compare!
