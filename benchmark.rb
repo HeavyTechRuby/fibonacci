@@ -11,6 +11,7 @@ require_relative 'lib/fibonacci/singleton'
 require_relative 'lib/fibonacci/cached'
 require_relative 'lib/fibonacci/loop'
 require_relative 'lib/fibonacci/object'
+require_relative 'lib/fibonacci/functional'
 
 Benchmark.ips do |x|
   # These parameters can also be configured this way
@@ -32,6 +33,7 @@ Benchmark.ips do |x|
   x.report('cached in redis') { Fibonacci::Cached::Numbers.new(cache: REDIS_CACHE).at(NUMBER) }
   x.report('loop') { Fibonacci::Loop.fibonacci(NUMBER) }
   x.report('object') { Fibonacci::Object.fibonacci(NUMBER) }
+  x.report('functional') { Fibonacci::Functional.fibonacci(NUMBER) }
 
   # Compare the iterations per second of the various reports!
   x.compare!
