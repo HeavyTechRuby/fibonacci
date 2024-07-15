@@ -13,6 +13,7 @@ require_relative 'lib/fibonacci/loop'
 require_relative 'lib/fibonacci/object'
 require_relative 'lib/fibonacci/functional'
 require_relative 'lib/fibonacci/adapter'
+require_relative 'lib/fibonacci/with_class_varialble'
 
 Benchmark.ips do |x|
   # These parameters can also be configured this way
