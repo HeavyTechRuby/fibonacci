@@ -14,6 +14,7 @@ require_relative 'lib/fibonacci/object'
 require_relative 'lib/fibonacci/functional'
 require_relative 'lib/fibonacci/adapter'
 require_relative 'lib/fibonacci/with_class_varialble'
+require_relative 'lib/fibonacci/iterative'
 
 Benchmark.ips do |x|
   # These parameters can also be configured this way
@@ -38,6 +39,7 @@ Benchmark.ips do |x|
   x.report('functional') { Fibonacci::Functional.fibonacci(NUMBER) }
   x.report('adapter') { Fibonacci::Adapter.new(:fast).fibonacci(NUMBER) }
   x.report('with_class_varialble') { Fibonacci::WithClassVarialble.fibonacci(NUMBER) }
+  x.report('iterative') { Fibonacci::Iterative.fibonacci(NUMBER) }
 
   # Compare the iterations per second of the various reports!
   x.compare!
