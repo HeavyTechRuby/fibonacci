@@ -11,7 +11,7 @@ require_relative 'lib/fibonacci/matrix_iterative'
 require_relative 'lib/fibonacci/matrix_with_lib'
 
 def benchmark_fibonacci
-  sizes = [1_000, 10_000, 100_000] # Ограничим тестирование до 10,000
+  sizes = [1_000, 10_000, 100_000] # Ограничим тестирование до 10,000 для методов, использующих рекурсию
   all_results = {}
 
   sizes.each do |size|
@@ -33,10 +33,12 @@ def benchmark_fibonacci
     fastest_time = results.first.last
 
     puts "\nBenchmark results for size #{size}:"
-    puts format("%-#{max_name_length}s %s %s", 'Method', 'Time (s)', 'Slower by (%)')
+    puts "#{'Method'.ljust(max_name_length)} Time (s)    Slower by (%)   Slower by Times"
     results.each do |method, time|
-      slower_by = time == fastest_time ? 0 : ((time - fastest_time) / fastest_time * 100).round(2)
-      puts format("%-#{max_name_length}s %0.6f %s", method, time, slower_by == 0 ? '-' : "#{slower_by}%")
+      slower_by_percent = time == fastest_time ? '-' : "#{((time - fastest_time) / fastest_time * 100).round(2)}%"
+      slower_by_times = time == fastest_time ? '-' : "#{(time / fastest_time).round(2)}x"
+      puts "#{method.ljust(max_name_length)} #{format('%0.6f',
+                                                      time)}  #{slower_by_percent.rjust(15)}  #{slower_by_times.rjust(17)}"
     end
   end
 end
