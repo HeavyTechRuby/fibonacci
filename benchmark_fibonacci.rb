@@ -12,30 +12,31 @@ require_relative 'lib/fibonacci/matrix_with_lib'
 
 def benchmark_fibonacci
   sizes = [1_000, 10_000, 100_000] # Ограничим тестирование до 10,000
-  results = {}
+  all_results = {}
 
   sizes.each do |size|
-    results[size] = []
-    results[size] << ['memoization', Benchmark.realtime { Fibonacci::Memoization.fibonacci(size) }] unless size > 10_000
-    results[size] << ['singleton', Benchmark.realtime { Fibonacci::Singleton.fibonacci(size) }] unless size > 10_000
-    results[size] << ['with_class_varialble', Benchmark.realtime { Fibonacci::WithClassVarialble.fibonacci(size) }]
-    results[size] << ['matrix', Benchmark.realtime { Fibonacci::Matrix.fibonacci(size) }]
-    results[size] << ['matrix_iterative', Benchmark.realtime { Fibonacci::MatrixIterative.fibonacci(size) }]
-    results[size] << ['matrix_with_lib', Benchmark.realtime { Fibonacci::MatrixWithLib.fibonacci(size) }]
+    results = []
+    puts "Benchmark for size #{size}:"
+    results << ['memoization', Benchmark.realtime { Fibonacci::Memoization.fibonacci(size) }] unless size > 10_000
+    results << ['singleton', Benchmark.realtime { Fibonacci::Singleton.fibonacci(size) }] unless size > 10_000
+    results << ['with_class_varialble', Benchmark.realtime { Fibonacci::WithClassVarialble.fibonacci(size) }]
+    results << ['matrix', Benchmark.realtime { Fibonacci::Matrix.fibonacci(size) }]
+    results << ['matrix_iterative', Benchmark.realtime { Fibonacci::MatrixIterative.fibonacci(size) }]
+    results << ['matrix_with_lib', Benchmark.realtime { Fibonacci::MatrixWithLib.fibonacci(size) }]
+
+    all_results[size] = results.sort_by { |_, time| time }
   end
 
-  results.each do |size, benchmarks|
-    sorted_benchmarks = benchmarks.sort_by { |_, time| time }
-    fastest_time = sorted_benchmarks.first.last
+  max_name_length = all_results.values.flatten(1).map { _1[0].length }.max
+
+  all_results.each do |size, results|
+    fastest_time = results.first.last
 
     puts "\nBenchmark results for size #{size}:"
-    sorted_benchmarks.each do |method, time|
-      if time == fastest_time
-        puts "#{method}: Fastest"
-      else
-        slower_by = ((time - fastest_time) / fastest_time * 100).round(2)
-        puts "#{method}: #{slower_by}% slower than the fastest"
-      end
+    puts format("%-#{max_name_length}s %s %s", 'Method', 'Time (s)', 'Slower by (%)')
+    results.each do |method, time|
+      slower_by = time == fastest_time ? 0 : ((time - fastest_time) / fastest_time * 100).round(2)
+      puts format("%-#{max_name_length}s %0.6f %s", method, time, slower_by == 0 ? '-' : "#{slower_by}%")
     end
   end
 end
