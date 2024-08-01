@@ -20,6 +20,7 @@ require_relative 'lib/fibonacci/matrix'
 require_relative 'lib/fibonacci/matrix_iterative'
 require_relative 'lib/fibonacci/matrix_with_lib'
 require_relative 'lib/fibonacci/binet'
+require_relative 'lib/fibonacci/binet_with_math'
 
 Benchmark.ips do |x|
   # These parameters can also be configured this way
