@@ -15,6 +15,11 @@ require_relative 'lib/fibonacci/functional'
 require_relative 'lib/fibonacci/adapter'
 require_relative 'lib/fibonacci/with_class_varialble'
 require_relative 'lib/fibonacci/iterative'
+require_relative 'lib/fibonacci/matrix'
+require_relative 'lib/fibonacci/matrix_iterative'
+require_relative 'lib/fibonacci/matrix_with_lib'
+require_relative 'lib/fibonacci/binet'
+require_relative 'lib/fibonacci/binet_with_math'
 
 Benchmark.ips do |x|
   # These parameters can also be configured this way
@@ -40,6 +45,11 @@ Benchmark.ips do |x|
   x.report('adapter') { Fibonacci::Adapter.new(:fast).fibonacci(NUMBER) }
   x.report('with_class_varialble') { Fibonacci::WithClassVarialble.fibonacci(NUMBER) }
   x.report('iterative') { Fibonacci::Iterative.fibonacci(NUMBER) }
+  x.report('matrix') { Fibonacci::Matrix.fibonacci(NUMBER) }
+  x.report('matrix with iterative') { Fibonacci::MatrixIterative.fibonacci(NUMBER) }
+  x.report("matrix with ruby lib 'matrix'") { Fibonacci::MatrixWithLib.fibonacci(NUMBER) }
+  x.report("Binet's formula") { Fibonacci::Binet.fibonacci(NUMBER) }
+  x.report("Binet's formula with math lib") { Fibonacci::BinetWithMath.fibonacci(NUMBER) }
 
   # Compare the iterations per second of the various reports!
   x.compare!
